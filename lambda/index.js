@@ -41,36 +41,35 @@ var handlers = {
 },
    'MedicineAvailableIntent': function () {
        
-        this.attributes.loc = slotValue(this.event.request.intent.slots.loc);
-        this.attributes.med = slotValue(this.event.request.intent.slots.med);
+    this.attributes.loc = slotValue(this.event.request.intent.slots.loc);
+    this.attributes.med = slotValue(this.event.request.intent.slots.med);
 
-        let lat;
-        let long;
-        let name, address, distance;
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.attributes.loc}&key=AIzaSyAT8CvxZX9KZnqnR5DKsvxyUMoWEMcEs2Y`)
-              .then(res => res.data)
-              .then(res => res.results[0])
-              .then(res => {
-                  lat = res.geometry.location.lat;
-                  long = res.geometry.location.lng;
-                  console.log(lat)
-              });
-        
-        axios.get(`https://fierce-forest-33378.herokuapp.com/nearest?medicine=${this.attributes.med}&latitude=${lat}&longitude=${long}`)
-              .then(res => res.data)
-              .then(res => res.shops)
-              .then(res => res.reverse())
-              .then(res => res[0])
-              .then(res => {
-                  name = res.name;
-                  address = res.address;
-                  distance = parseInt(res.distance);
-                  let say = `The nearest shop having ${this.attributes.med} in ${this.attributes.loc} is ${name}. It is at ${address} and about ${distance} km away.`;
-                  
-                  this.response.speak(say).listen("Ask for help if not sure what to do!");
-                  this.emit(":responseReady");
-              })
-              .catch(error => console.log(error.message));
+    let lat;
+    let long;
+    let name, address, distance;
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.attributes.loc}&key=AIzaSyAT8CvxZX9KZnqnR5DKsvxyUMoWEMcEs2Y`)
+          .then(res => res.data)
+          .then(res => res.results[0])
+          .then(res => {
+              lat = res.geometry.location.lat;
+              long = res.geometry.location.lng;
+              console.log(lat)
+          });
+    
+    axios.get(`https://fierce-forest-33378.herokuapp.com/nearest?medicine=${this.attributes.med}&latitude=${lat}&longitude=${long}`)
+          .then(res => res.data)
+          .then(res => res.shops)
+          .then(res => res[0])
+          .then(res => {
+              name = res.name;
+              address = res.address;
+              distance = parseInt(res.distance);
+              let say = `The nearest shop having ${this.attributes.med} in ${this.attributes.loc} is ${name}. It is at ${address} and about ${parseFloat(distance/1000)} km away.`;
+              
+              this.response.speak(say).listen("Ask for help if not sure what to do!");
+              this.emit(":responseReady");
+          })
+          .catch(error => console.log(error.message));
 
         
        
@@ -171,7 +170,7 @@ function slotValue(slot, useId){
 
 function capitalize(s)
 {
-    return s[0].toUpperCase() + s.lowercase().slice(1);
+    return s[0].toUpperCase() + s.toLowerCase().slice(1);
 }
 
 
