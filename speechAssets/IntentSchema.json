@@ -1,0 +1,259 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "injuryType",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "sprain",
+              "synonyms": [
+                "ankle sprain"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "nosebleed",
+              "synonyms": [
+                "nose bleed"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "papercut",
+              "synonyms": [
+                "paper cut"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "fever",
+              "synonyms": [
+                "chills",
+                "dehydration",
+                "congestion"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "chestpain",
+              "synonyms": [
+                "chest pain",
+                "leftarmtingling",
+                "abnormal pulse"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "dizziness",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "nausea",
+              "synonyms": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "location",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "me",
+              "synonyms": [
+                "around me"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "london",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "delhi",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "mumbai",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "tokyo",
+              "synonyms": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "Medicine",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "combiflam",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "paracetamol",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "saridon",
+              "synonyms": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "strokeorattack",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "Heart Attack",
+              "synonyms": [
+                "attack",
+                "heartache",
+                "heart ache"
+              ]
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "Stroke",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "CPRIntent",
+        "samples": [
+          "How to perform a CPR",
+          "Learn CPR",
+          "CPR",
+          "Tell me how to do CPR",
+          "What's the best way to do CPR",
+          "If I need to do CPR how would I do it",
+          "how do I perform CPR"
+        ],
+        "slots": []
+      },
+      {
+        "name": "MedicineAvailableIntent",
+        "samples": [
+          "Find medical stores near {loc} having {med}",
+          "medical stores near {loc} with {med} available",
+          "where can I find {med} in {loc}"
+        ],
+        "slots": [
+          {
+            "name": "loc",
+            "type": "location"
+          },
+          {
+            "name": "med",
+            "type": "Medicine"
+          }
+        ]
+      },
+      {
+        "name": "NearestStoreIntent",
+        "samples": [
+          "Find medical stores near {loc}",
+          "medical stores near {loc}",
+          "{loc}",
+          "medical stores in {loc}"
+        ],
+        "slots": [
+          {
+            "name": "loc",
+            "type": "location"
+          }
+        ]
+      },
+      {
+        "name": "StrokeAttackWarningIntent",
+        "samples": [
+          "What are the warning signs of a {strack}",
+          "I think I am having a {strack}",
+          "How can I tell if I am having a {strack}"
+        ],
+        "slots": [
+          {
+            "name": "strack",
+            "type": "strokeorattack"
+          }
+        ]
+      },
+      {
+        "name": "TreatmentIntent",
+        "samples": [
+          "how should I treat a {injury}",
+          "how do I treat {injury}",
+          "treat {injury}",
+          "i got a {injury}",
+          "help me with {injury}",
+          "I am having {injury}",
+          "I am feeling {injury}",
+          "feeling {injury}"
+        ],
+        "slots": [
+          {
+            "name": "injury",
+            "type": "injuryType"
+          }
+        ]
+      }
+    ],
+    "invocationName": "care buddy"
+  }
+}
